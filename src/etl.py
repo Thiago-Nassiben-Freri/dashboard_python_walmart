@@ -2,7 +2,7 @@ import pandas as pd
 
 
 # Carregando os dados
-df = pd.read_csv("data/Walmart_Sales.csv")
+df = pd.read_csv("data/raw/Walmart_Sales.csv")
 
 # Checando os tipos dos dados
 print(df.dtypes)
@@ -16,3 +16,6 @@ print(df.dtypes)
 
 # Mostra os cinco primeiros resultados
 print(df.head(5))
+
+# Manda os dados processados para a pasta clean
+df.to_csv("data/clean/dataset_walmart.csv", index=False)
