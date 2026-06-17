@@ -1,4 +1,4 @@
-# 📊 Walmart Sales Dashboard
+# 📊 Dashboard de Vendas da Walmart
 
 ## PT-BR
 Um dashboard simples para análise de vendas da :contentReference[oaicite:0]{index=0}, desenvolvido em **Python** utilizando bibliotecas como:
