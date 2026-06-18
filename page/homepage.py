@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import plotly.express as px
 
 
 # Configurações inicias da página
@@ -13,6 +14,16 @@ st.set_page_config(
 def load_data():
     data = pd.read_csv("data/clean/dataset_walmart.csv")
     return data
+
+# Formatação para o formato de moeda em dólar
+def format_currency(value):
+    if value >= 1_000_000_000:
+        return f"${value/1_000_000_000:.2f}B"
+    elif value >= 1_000_000:
+        return f"${value/1_000_000:.2f}M"
+    elif value >= 1_000:
+        return f"${value/1_000:.2f}"
+    return f"${value:.2f}"
 
 # Armaneza os dados na variável df
 df = load_data()
@@ -51,4 +62,17 @@ if year != "Todos":
 if store != "Todos":
     df_filtered = df_filtered[df_filtered["Store"] == store]
 
-st.dataframe(df_filtered)
+# KPIs
+total_sales = df_filtered["Weekly_Sales"].sum()
+avg_sales = df_filtered["Weekly_Sales"].mean()
+max_sales = df_filtered["Weekly_Sales"].max()
+min_sales = df_filtered["Weekly_Sales"].min()
+
+# Colunas das KPIs
+col1, col2, col3, col4 = st.columns(4)
+
+# Insere essas KPIs
+col1.metric("Total de Vendas", format_currency(total_sales))
+col2.metric("Média de Vendas", format_currency(avg_sales))
+col3.metric("Maior Venda", format_currency(max_sales))
+col4.metric("Menor Venda", format_currency(min_sales))
