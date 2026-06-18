@@ -28,13 +28,30 @@ def format_currency(value):
 # Armaneza os dados na variável df
 df = load_data()
 
+# Ordem correta dos meses
+month_order = [
+    "January", "February", "March", "April",
+    "May", "June", "July", "August",
+    "September", "October", "November", "December"
+]
+
+# Define a coluna Month como categórica ordenada
+df["Month"] = pd.Categorical(
+    df["Month"],
+    categories=month_order,
+    ordered=True
+)
+
 # Título do menu de seleção
 st.sidebar.title("Menu de Seleção")
+
+# Meses disponíveis respeitando a ordem correta
+available_months = [m for m in month_order if m in df["Month"].unique()]
 
 # Caixa de seleção de mês
 month = st.sidebar.selectbox(
     "Selecione o mês",
-    ["Todos"] + sorted(df["Month"].unique().tolist())
+    ["Todos"] + available_months
 )
 
 # Caixa de seleção do ano
@@ -76,3 +93,38 @@ col1.metric("Total de Vendas", format_currency(total_sales))
 col2.metric("Média de Vendas", format_currency(avg_sales))
 col3.metric("Maior Venda", format_currency(max_sales))
 col4.metric("Menor Venda", format_currency(min_sales))
+
+# Filtragem inicial do gráfico de linhas
+sales_month = (
+    df_filtered.groupby("Month")["Weekly_Sales"]
+    .sum()
+    .reset_index()
+    .sort_values("Month")
+)
+
+# Gráfico de linhas
+fig_line = px.line(
+    sales_month,
+    x="Month",
+    y="Weekly_Sales",
+    title="Evolução das Vendas por Mês",
+    markers=True
+)
+
+# Filtragem inicial do gráfico de barras
+sales_store = df_filtered.groupby("Store")["Weekly_Sales"].sum().reset_index()
+
+# Gráfico de barras
+fig_bar = px.bar(
+    sales_store,
+    x="Store",
+    y="Weekly_Sales",
+    title="Total de Vendas por Loja"
+)
+
+col5, col6 = st.columns(2)
+
+with col5:
+    st.plotly_chart(fig_line, width="stretch")
+with col6:
+    st.plotly_chart(fig_bar, width="stretch")
