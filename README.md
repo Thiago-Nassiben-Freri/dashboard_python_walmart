@@ -1,10 +1,11 @@
 # 📊 Dashboard de Vendas da Walmart
 
 ## PT-BR
-Um dashboard simples para análise de vendas da :contentReference[oaicite:0]{index=0}, desenvolvido em **Python** utilizando bibliotecas como:
+Um dashboard simples para análise de vendas da Walmart, desenvolvido em **Python** utilizando bibliotecas como:
 
 - Pandas → manipulação e análise de dados  
-- Streamlit → criação e publicação de dashboards web  
+- Streamlit → criação e publicação de dashboards web
+- Plotly → inserção de gráficos
 
 O projeto tem como objetivo fornecer uma visualização clara e interativa dos dados de vendas, permitindo acompanhar métricas importantes e gerar insights de forma prática.
 
@@ -20,10 +21,11 @@ O projeto tem como objetivo fornecer uma visualização clara e interativa dos d
 # 📊 Walmart Sales Dashboard
 
 ## EN-US
-A simple sales analysis dashboard for :contentReference[oaicite:0]{index=0}, built with **Python** using libraries such as:
+A simple sales analysis dashboard for Walmart, built with **Python** using libraries such as:
 
 - Pandas → data manipulation and analysis  
-- Streamlit → web dashboard development and deployment  
+- Streamlit → web dashboard development and deployment
+- Plotly → inserting charts
 
 This project aims to provide clear and interactive sales data visualization, allowing users to monitor key performance indicators (KPIs) and generate insights efficiently.
 
@@ -39,3 +41,4 @@ This project aims to provide clear and interactive sales data visualization, all
 - Python 3.x
 - Pandas
 - Streamlit
+- Plotly
