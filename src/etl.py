@@ -10,6 +10,8 @@ print(df.dtypes)
 # Transformando e padronizando os dados
 df["Date"] = pd.to_datetime(df["Date"], format='%d-%m-%Y') # Converte para o padrão dia, mês e ano
 df["Temperature"] = (df["Temperature"] - 32) * (5/9) # Converte de Fahrenheit para Celsius
+df["Month"] = df["Date"].dt.month_name() # Cria uma coluna com o nome do mês
+df["Year"] = df["Date"].dt.year # Cria uma coluna com o ano
 
 # Checando os tipos dos dados (novamente)
 print(df.dtypes)
